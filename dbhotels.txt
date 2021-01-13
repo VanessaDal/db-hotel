@@ -11,13 +11,20 @@ SELECT * FROM ospiti WHERE name LIKE 'D%'
 ●	Calcola il totale degli ordini accepted
 SELECT COUNT(*) FROM pagamenti where status like 'accepted'
 ●	Qual è il prezzo massimo pagato?
+SELECT MAX(price) FROM pagamenti
 ●	Seleziona gli ospiti riconosciuti con patente e nati nel 1975
+SELECT * FROM ospiti WHERE YEAR(date_of_birth)=1975 AND document_type LIKE 'driver license'
 ●	Quanti paganti sono anche ospiti?
+SELECT * FROM paganti WHERE ospite_id IS NOT NULL
 ●	Quanti posti letto ha l’hotel in totale?
+SELECT SUM(beds) FROM stanze
 
 Group by
 ●	Conta gli ospiti raggruppandoli per anno di nascita
+SELECT YEAR(date_of_birth), COUNT(*) FROM ospiti GROUP BY YEAR(date_of_birth)
 ●	Somma i prezzi dei pagamenti raggruppandoli per status
+SELECT status, SUM(price) FROM pagamenti GROUP BY status
 ●	Conta quante volte è stata prenotata ogni stanza
+SELECT stanza_id, COUNT(*) FROM prenotazioni GROUP BY stanza_id
 ●	Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti
 ●	Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
